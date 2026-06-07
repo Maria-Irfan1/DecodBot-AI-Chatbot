@@ -1,42 +1,42 @@
 import string
 from datetime import datetime
 
-def sanitize_input(raw_text):
+def sanitize_input(rawText):
    
-    lowercase_text = raw_text.lower()
+    lowercase = rawText.lower()
     
-    clean_chars = []
-    for char in lowercase_text:
+    cleanChar = []
+    for char in lowercase:
         if char not in string.punctuation:
-            clean_chars.append(char)
+            cleanChar.append(char)
             
-    clean_text = "".join(clean_chars)
+    cleanText = "".join(cleanChar)
     
-    return clean_text.strip()
+    return cleanText.strip()
 
 
-def process_response(cleaned_text):
+def process_response(cleaned):
 
-    if cleaned_text in ["hello", "hi", "hey", "yo", "sup"]:
+    if cleaned in ["hello", "hi", "hey", "yo", "sup"]:
         return "Bot: Hey there! Great to chat with you today. What's on your mind? "
         
-    elif cleaned_text in ["good morning", "morning"]:
+    elif cleaned in ["good morning", "morning"]:
         return "Bot: Good morning!  I hope you have an amazing and productive day ahead!"
         
-    elif cleaned_text in ["whats your name", "name", "your name"]:
+    elif cleaned in ["whats your name", "name", "your name"]:
         return "Bot: I'm DecodBot! Your friendly desktop companion built right here at DecodeLabs. "
         
-    elif cleaned_text in ["how are you", "how r u", "how you doing"]:
+    elif cleaned in ["how are you", "how r u", "how you doing"]:
         return "Bot: I'm doing fantastic, thank you for asking! Just happy to keep you company. How are things on your end?"
         
-    elif cleaned_text in ["time", "clock", "date"]:
-        current_time = datetime.now().strftime("%I:%M %p")
-        return f"Bot: The current system time is exactly {current_time}. "
+    elif cleaned in ["time", "clock", "date"]:
+        time = datetime.now().strftime("%I:%M %p")
+        return f"Bot: The current system time is exactly {time}. "
         
-    elif cleaned_text in ["joke", "jokes", "make me laugh"]:
+    elif cleaned in ["joke", "jokes", "make me laugh"]:
         return "Bot: Why do programmers prefer dark mode? Because light attracts bugs! "
         
-    elif cleaned_text in ["help", "options", "what can you do"]:
+    elif cleaned in ["help", "options", "what can you do"]:
         return "Bot: We can talk about quite a few things! Try asking for my 'name', the current 'time', or tell me to drop a 'joke'!"
         
     else:
@@ -50,15 +50,15 @@ print("###########################################")
 print()
 
 while True:
-    user_raw_feed = input("You: ")
-    user_clean_feed = sanitize_input(user_raw_feed)
+    rawFeed = input("You: ")
+    cleanFeed = sanitize_input(rawFeed)
     
-    if user_clean_feed in ["exit", "bye", "quit", "goodbye"]:
+    if cleanFeed in ["exit", "bye", "quit", "goodbye"]:
         print("Bot: Goodbye! Have an amazing rest of your day!")
         break
-    if user_clean_feed == "":
+    if cleanFeed == "":
         continue
         
-    bot_reply = process_response(user_clean_feed)
-    print(bot_reply)
+    botReply = process_response(cleanFeed)
+    print(botReply)
     print()
